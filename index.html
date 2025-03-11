@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banadir School Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url("tech.jpg") no-repeat center center/cover;
+           
+background-size: cover;
+            color: white;
+            text-align: center;
+        }
+        h1 {
+            color: rgb(223, 218, 218);
+        }
+        h2 {
+            color: aqua;
+        }
+        h3 {
+            margin: 0;
+            padding-left: 65px;
+            font-size: 28px;
+        }
+        h4 img {
+            width: 100px;
+            height: 120px;
+            position: relative;
+            border-radius: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+        .header {
+            background: rgb(7, 110, 151);
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo {
+            width: 80px;
+            height: 70px;
+            position: absolute;
+            left: 10px;
+            animation: rotateLogo 3s infinite alternate;
+        }
+        @keyframes rotateLogo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.9);
+            color: rgb(6, 111, 129);
+            box-shadow: 0px 0px 10px gray;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid rgb(90, 3, 3);
+        }
+        tr:hover {
+            background: rgb(3, 93, 116);
+            color: rgb(248, 248, 248);
+        }
+        .footer {
+            margin-top: 20px;
+            background: rgb(6, 135, 185);
+            padding: 15px;
+            font-size: 18px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: rgb(189, 108, 3);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: rgb(1, 100, 117);
+        }
+        @media print {
+            button {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                font-size: 16px;
+                padding: 15px;
+            }
+            .logo {
+                width: 60px;
+                height: 50px;
+            }
+            table {
+                width: 100%;
+            }
+            th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
+            h3 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body onload="calculateGPA()">
+    <div class="header">
+        <img src="LOGO BREMOVE.png" class="logo" alt="School Logo">
+        <h3>BANADIR SCHOOL BEST</h3>
+    </div>
+    <h4><img src="mohamed n.JPG" alt="waa la hubina"></h4> 
+    <h1>Mohamed Abdulkadir Mohamed</h1>
+    <h2>ID No. 0001</h2>
+    <table id="resultsTable">
+        <tr>
+            <th>No.</th>
+            <th>Maadada</th>
+            <th>Buuntada</th>
+            <th>Darajo</th>
+            <th>Fasalka</th>
+        </tr>
+        <tr><td>1</td><td>WINDOW 10</td>
+            <td>100</td>
+            <td>B+</td>
+            <td>COMPUTER</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>MS-WORD</td>
+            <td>100</td>
+            <td>D</td>
+            <td>COMPUTER</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>M-S EXCEL</td>
+            <td>100</td>
+            <td>B</td>
+            <td>COMPUTER</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>M-S POWER POINT</td>
+            <td>100</td>
+            <td>B+</td>
+            <td>COMPUTER</td>
+        </tr>
+    </table>
+    <div class="footer">
+        GPA: <span id="gpa">0</span> | Average: <span id="average">0%</span> | Status: <span id="status">Pending</span>
+    </div>
+    <button onclick="printResults()">Print</button>
+    <script>
+        function calculateGPA() {
+            let table = document.getElementById("resultsTable");
+            let totalPoints = 0;
+            let subjects = 0;
+            let gpaTotal = 0;
+            
+            for (let i = 1; i < table.rows.length; i++) {
+                let points = parseInt(table.rows[i].cells[2].innerText);
+                if (!isNaN(points)) {
+                    totalPoints += points;
+                    subjects++;
+                    gpaTotal += points / 20; // Convert to GPA scale (assuming 100 = 5 GPA)
+                }
+            }
+            
+            let average = (totalPoints / subjects).toFixed(2);
+            let gpa = (gpaTotal / subjects).toFixed(2);
+            
+            document.getElementById("gpa").innerText = gpa;
+            document.getElementById("average").innerText = average + "%";
+            document.getElementById("status").innerText = gpa >= 1.0 ? "Passed" : "Failed";
+        }
+        
+        function printResults() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
